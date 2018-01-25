@@ -230,8 +230,8 @@ int check_stu_xinxi()
 {
 	//struct stu students;
 	FILE *fp;
-	int n = 0;		//文件总行数
-	int flag = 0;
+	int n = 0;		//文件行数   
+ 	int flag = 0;
 	char buf[1024];
 	fp = fopen("F:\stuinfo.txt", "r");
 	if (fp == 0)
@@ -246,7 +246,7 @@ int check_stu_xinxi()
 	}
 	fclose(fp);
 	printf("该文件一共有%d条信息\n", n);
-	printf("返回上级菜单请按2，退出请安0\n");
+	printf("返回上级菜单请按2，退出请按0\n");
 	scanf_s("%d", &flag);
 	if (flag == 0)
 	{
@@ -266,7 +266,7 @@ int browse_stu_xinxi()
 {
 	char buf[1024];
 	FILE *fp;
-	//char *str;
+	//char *str123;
 	int i = 0;
 	fp = fopen("F:\stuinfo.txt", "r");
 	if (fp == NULL)
@@ -287,6 +287,7 @@ int browse_stu_xinxi()
 		fscanf(fp, "%s	%s	%s	%s	%s	%s	%s	%s", students[i].stu_no, students[i].name, students[i].age, students[i].sex, students[i].birth_date, students[i].phone, students[i].email);
 		printf("%s %s %s %s %s %s %s %s,i\n", students[i].stu_no, students[i].name, students[i].age, students[i].sex, students[i].birth_date, students[i].phone, students[i].email);
 		i++;
+		printf("%d\n",i);
 
 	}
 	/*
