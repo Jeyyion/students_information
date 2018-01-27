@@ -161,7 +161,7 @@ int input_stu_xinxi()
 		/****
 		if (fwrite(&students[i], sizeof(struct stu), 1, fp) != 1)
 		{
-		printf("\n file write error \n");
+		printf("\n file write error \n");s
 		}
 		****/
 		for (i = 0; i < m; i++)
@@ -268,15 +268,21 @@ int browse_stu_xinxi()
 	FILE *fp;
 	//char *str123;
 	int i = 0;
+	int n= 0;
+	memset(buf, 0x00, sizeof(buf));
 	fp = fopen("F:\stuinfo.txt", "r");
 	if (fp == NULL)
 	{
 		printf("文件打开错误\n");
 		exit(0);
 	}
+	//printf("%s",students[i].address);
 	while (fgets(buf, 1024, fp))
-	{
-		/*  思考 用strtok
+	{	
+		//n = strlen(buf);
+		//fseek(fp, n + 1, SEEK_SET);
+		printf("%s\n", buf);
+		/* 思考 用strtok
 		str = strtok(buf, "\t");
 		while (str!=NULL)
 		{
@@ -285,10 +291,11 @@ int browse_stu_xinxi()
 		}
 		*/
 		//有问题，运行就有问题，还有思考，在已经有文件内容继续添加数据。
-		fscanf(fp, "%s	%s	%s	%s	%s	%s	%s	%s", students[i].stu_no, students[i].name, students[i].age, students[i].sex, students[i].birth_date, students[i].phone, students[i].email);
-		printf("%s %s %s %s %s %s %s %s,i\n", students[i].stu_no, students[i].name, students[i].age, students[i].sex, students[i].birth_date, students[i].phone, students[i].email);
+		printf("这是第%d条数据\n", i);
+		fscanf(fp, "%s	%s	%s	%s	%s	%s	%s	%s", &students[i].stu_no, &students[i].name, &students[i].age, &students[i].sex, &students[i].birth_date, &students[i].address,&students[i].phone, &students[i].email);
+		printf("%s,%s,%s,%s,%s,%s,%s,%s,%d\n", students[i].stu_no, students[i].name, students[i].age, students[i].sex, students[i].birth_date, students[i].phone, students[i].address, students[i].email,i);
 		i++;
-		printf("%d\n",i);
+		memset(buf, 0x00, sizeof(buf));
 
 	}
 	/*
