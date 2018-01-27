@@ -284,6 +284,7 @@ int browse_stu_xinxi()
 		str = strtok(NULL, "\t");
 		}
 		*/
+		//有问题，运行就有问题，还有思考，在已经有文件内容继续添加数据。
 		fscanf(fp, "%s	%s	%s	%s	%s	%s	%s	%s", students[i].stu_no, students[i].name, students[i].age, students[i].sex, students[i].birth_date, students[i].phone, students[i].email);
 		printf("%s %s %s %s %s %s %s %s,i\n", students[i].stu_no, students[i].name, students[i].age, students[i].sex, students[i].birth_date, students[i].phone, students[i].email);
 		i++;
@@ -299,3 +300,4 @@ int browse_stu_xinxi()
 	return 0;
 }
 
+   
