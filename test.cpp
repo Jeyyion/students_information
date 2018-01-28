@@ -1,25 +1,25 @@
-/*��1����������
-ѧ����Ϣ������ѧ�ţ����������䣬�Ա𣬳������£���ַ���绰��E - mail�ȡ������һѧ����Ϣ����ϵͳ��ʹ֮���ṩ���¹��ܣ�
-1.ϵͳ�Բ˵���ʽ����
-2.ѧ����Ϣ¼�빦�ܣ�ѧ����Ϣ���ļ����棩-- - ����
-3.ѧ����Ϣ������ܡ������
-4.��ѯ�������ܡ����㷨
-1����ѧ�Ų�ѯ
-2����������ѯ
-5.ѧ����Ϣ��ɾ�����޸ģ���ѡ�
-��2������Ҫ��
-1.��������ˣ�
-2.��һ�����ݴ���������������ĳɼ�����0��100֮�䣬����ʾ���Ϸ���Ҫ���������룻
-3.����������ķ�ʽʵ��
+﻿/*（1）问题描述
+学生信息包括：学号，姓名，年龄，性别，出生年月，地址，电话，E - mail等。试设计一学生信息管理系统，使之能提供以下功能：
+1.系统以菜单方式工作
+2.学生信息录入功能（学生信息用文件保存）-- - 输入
+3.学生信息浏览功能——输出
+4.查询、排序功能——算法
+1、按学号查询
+2、按姓名查询
+5.学生信息的删除与修改（可选项）
+（2）功能要求
+1.界面简单明了；
+2.有一定的容错能力，比如输入的成绩不在0～100之间，就提示不合法，要求重新输入；
+3.最好用链表的方式实现
 
-���棺
--------------ѧ����Ϣ����ϵͳ---------------
-1. ѧ����Ϣ¼��
-2. ѧ����Ϣ���
-3. ѧ����Ϣ��ѯ
-1.��ѧ�Ų�ѯ
-2.��������ѯ
-4. ѧ����Ϣ��ɾ�����޸�
+界面：
+-------------学生信息管理系统---------------
+1. 学生信息录入
+2. 学生信息浏览
+3. 学生信息查询
+1.按学号查询
+2.按姓名查询
+4. 学生信息的删除与修改
 --------------------------------------------
 */
 #include<stdio.h>
@@ -55,16 +55,16 @@ int main()
 void menu()
 {
 	int choose;
-	printf("-------------ѧ����Ϣ����ϵͳ-------------\n");
-	printf("\t1.ѧ����Ϣ¼��\n");
-	printf("\t2.ѧ����Ϣ���\n");
-	printf("\t3.ѧ����Ϣ��ѯ\n");
-	printf("\t4.ѧ����Ϣɾ�����޸�\n");
-	printf("\t0.�˳�ϵͳ\n");
+	printf("-------------学生信息管理系统-------------\n");
+	printf("\t1.学生信息录入\n");
+	printf("\t2.学生信息浏览\n");
+	printf("\t3.学生信息查询\n");
+	printf("\t4.学生信息删除与修改\n");
+	printf("\t0.退出系统\n");
 	printf("------------------------------------------\n");
-	printf("����������ѡ�⣨0-4��: ");
+	printf("请输入您的选测（0-4）: ");
 	scanf_s("%d", &choose);
-	printf("����ѡ��%d\n", choose);
+	printf("您的选择：%d\n", choose);
 	switch (choose)
 	{
 	case 0: exit(0); break;
@@ -77,7 +77,7 @@ void menu()
 	}
 	while (choose > 4 || choose < 0)
 	{
-		printf("��������һ����Ч���֣����������루0-4��: ");
+		printf("您输入了一个无效数字，请重新输入（0-4）: ");
 		scanf_s("%d", &choose);
 	}
 }
@@ -91,7 +91,7 @@ int input_stu_xinxi()
 	errno_t err= (fopen_s(&fp, "F:\stuinfo.txt", "w"));
 	if (err!= 0)
 	{
-	printf("�ļ��򿪴���\n");
+	printf("文件打开错误\n");
 	exit(0);
 	}
 	if (fwrite(&students, sizeof(struct stu), 1, fp)!=1)
@@ -99,35 +99,35 @@ int input_stu_xinxi()
 	printf("\n file write error \n");
 	}
 
-	�ļ���д����Ҫ����
-	printf("\tѧ��:");
+	文件的写还需要完善
+	printf("\t学号:");
 	scanf("%s", students.stu_no);
 	fputs(students.stu_no,fp);
-	printf("\t����:");
+	printf("\t姓名:");
 	scanf("%s", students.name);
 	fputs(students.name, fp);
-	printf("\t����:");
+	printf("\t年龄:");
 	scanf("%s", students.age);
 	fputs(students.age, fp);
-	printf("\t�Ա�:");
+	printf("\t性别:");
 	scanf("%s", students.sex);
 	fputs(students.sex, fp);
-	printf("\t��������:");
+	printf("\t出生年月:");
 	scanf("%s", students.birth_date);
 	fputs(students.birth_date, fp);
-	printf("\t��ַ:");
+	printf("\t地址:");
 	scanf("%s", students.address);
 	fputs(students.address, fp);
-	printf("\t�绰:");
+	printf("\t电话:");
 	scanf("%s", students.phone);
 	fputs(students.phone, fp);
-	printf("\t�ʼ�:");
+	printf("\t邮件:");
 	scanf("%s", students.email);
 	fputs(students.email, fp);
 	printf("\n");
 	fclose(fp);
 	memset(&students,0x00,sizeof(struct stu));
-	printf("���������밴1�������ϼ��˵��밴2���˳��밲0\n");
+	printf("继续输入请按1，返回上级菜单请按2，退出请安0\n");
 	scanf_s("%d", &flag);
 	if (flag == 0)
 	{
@@ -147,7 +147,7 @@ int input_stu_xinxi()
 	******/
 	FILE *fp;
 	int i, m, flag = 1;
-	printf("������ȼ�ѧ����Ϣ����������");
+	printf("请输入等级学生信息的总人数：");
 	scanf_s("%d", &m);
 	while (flag)
 	{
@@ -155,7 +155,7 @@ int input_stu_xinxi()
 		//errno_t err = (fopen_s(&fp, "F:\stuinfo.txt", "w"));
 		if (fp == 0)
 		{
-			printf("�ļ��򿪴���\n");
+			printf("文件打开错误\n");
 			exit(0);
 		}
 		/****
@@ -166,48 +166,48 @@ int input_stu_xinxi()
 		****/
 		for (i = 0; i < m; i++)
 		{
-			printf("ѧ�ţ�");   
+			printf("学号：");
 			scanf("%s", &students[i].stu_no);
 			fputs(students[i].stu_no, fp);
 			fputs("\t", fp);
 
-			printf("������");
+			printf("姓名：");
 			scanf("%s", &students[i].name);
 			fputs(students[i].name, fp);
 			fputs("\t", fp);
 
-			printf("���䣺");
+			printf("年龄：");
 			scanf("%s", &students[i].age);
 			fputs(students[i].age, fp);
 			fputs("\t", fp);
 
-			printf("�Ա�");
+			printf("性别：");
 			scanf("%s", &students[i].sex);
 			fputs(students[i].sex, fp);
 			fputs("\t", fp);
 
-			printf("�������£�");
+			printf("出生年月：");
 			scanf("%s", &students[i].birth_date);
 			fputs(students[i].birth_date, fp);
 			fputs("\t", fp);
 
-			printf("��ַ��");
+			printf("地址：");
 			scanf("%s", &students[i].address);
 			fputs(students[i].address, fp);
 			fputs("\t", fp);
 
-			printf("�绰��");
+			printf("电话：");
 			scanf("%s", &students[i].phone);
 			fputs(students[i].phone, fp);
 			fputs("\t", fp);
 
-			printf("�ʼ���");
+			printf("邮件：");
 			scanf("%s", &students[i].email);
 			fputs(students[i].email, fp);
 			fputs("\n", fp);
 		}
 		fclose(fp);
-		printf("���������밴1�������ϼ��˵��밴2���˳��밲0\n");
+		printf("继续输入请按1，返回上级菜单请按2，退出请安0\n");
 		scanf_s("%d", &flag);
 		if (flag == 0)
 		{
@@ -230,13 +230,13 @@ int check_stu_xinxi()
 {
 	//struct stu students;
 	FILE *fp;
-	int n = 0;		//�ļ�����   
- 	int flag = 0;
+	int n = 0;		//文件行数   
+	int flag = 0;
 	char buf[1024];
 	fp = fopen("F:\stuinfo.txt", "r");
 	if (fp == 0)
 	{
-		printf("�ļ��򿪴���\n");
+		printf("文件打开错误\n");
 		exit(0);
 	}
 	while (fgets(buf, 1024, fp))
@@ -245,8 +245,8 @@ int check_stu_xinxi()
 		printf("%s\n", buf);
 	}
 	fclose(fp);
-	printf("���ļ�һ����%d����Ϣ\n", n);
-	printf("�����ϼ��˵��밴2���˳��밴0\n");
+	printf("该文件一共有%d条信息\n", n);
+	printf("返回上级菜单请按2，退出请按0\n");
 	scanf_s("%d", &flag);
 	if (flag == 0)
 	{
@@ -264,47 +264,81 @@ int check_stu_xinxi()
 
 int browse_stu_xinxi()
 {
+
 	char buf[1024];
 	FILE *fp;
 	//char *str123;
 	int i = 0;
-	int n= 0;
+	int n = 0;
 	memset(buf, 0x00, sizeof(buf));
 	fp = fopen("F:\stuinfo.txt", "r");
 	if (fp == NULL)
 	{
-		printf("�ļ��򿪴���\n");
+		printf("文件打开错误\n");
 		exit(0);
 	}
 	//printf("%s",students[i].address);
 	while (fgets(buf, 1024, fp))
-	{	
+		//while(feof(fp)==0)
+	{
 		//n = strlen(buf);
 		//fseek(fp, n + 1, SEEK_SET);
-		printf("%s\n", buf);
-		/* ˼�� ��strtok
-		str = strtok(buf, "\t");
-		while (str!=NULL)
-		{
-		students[i].stu_no = str;
-		str = strtok(NULL, "\t");
-		}
-		*/
-		//�����⣬���о������⣬����˼�������Ѿ����ļ����ݼ����������ݡ�
-		printf("���ǵ�%d������\n", i);
-		fscanf(fp, "%s	%s	%s	%s	%s	%s	%s	%s", &students[i].stu_no, &students[i].name, &students[i].age, &students[i].sex, &students[i].birth_date, &students[i].address,&students[i].phone, &students[i].email);
-		printf("%s,%s,%s,%s,%s,%s,%s,%s,%d\n", students[i].stu_no, students[i].name, students[i].age, students[i].sex, students[i].birth_date, students[i].phone, students[i].address, students[i].email,i);
+		//printf("%s\n", buf);
+		// 思考 用strtok
+		//str = strtok(buf, "\t");
+		//while (str!=NULL)
+		//{
+		//students[i].stu_no = str;
+		//str = strtok(NULL, "\t");
+		//}
+
+		//有问题，运行就有问题，还有思考，在已经有文件内容继续添加数据。
+		printf("这是第%d条数据\n", i + 1);
+		fscanf(fp, "%s	%s	%s	%s	%s	%s	%s	%s", students[i].stu_no, students[i].name, students[i].age, students[i].sex, students[i].birth_date, students[i].address, students[i].phone, students[i].email);
+		printf("%s,%s,%s,%s,%s,%s,%s,%s,%d\n", students[i].stu_no, students[i].name, students[i].age, students[i].sex, students[i].birth_date, students[i].phone, students[i].address, students[i].email, i);
 		i++;
 		memset(buf, 0x00, sizeof(buf));
-
 	}
-	/*
-	char buf[1024];
-	scanf("%s",buf);
-	printf("%d\n",sizeof());
-	*/
+	//printf("%s,%s\n", students[0].stu_no, students[1].stu_no); 测试结构体中是否有值
+	/*****
+	FILE *fp;
+	int i = 0;
+	int n = 0;
+	int err = 1;
+
+	fp = fopen("F:\\stuinfo.txt", "r");
+	if (fp == NULL)
+	{
+	printf("文件打开错误\n");
+	exit(0);
+	}
+
+	while (err != EOF)
+	{
+	err = fscanf(fp, "%s    %s    %s    %s    %s    %s    %s    %s",
+	&students[i].stu_no,
+	&students[i].name,
+	&students[i].age,
+	&students[i].sex,
+	&students[i].birth_date,
+	&students[i].address,
+	&students[i].phone,
+	&students[i].email);
+	printf("%s,%s,%s,%s,%s,%s,%s,%s\n",
+	students[i].stu_no,
+	students[i].name,
+	students[i].age,
+	students[i].sex,
+	students[i].birth_date,
+	students[i].phone,
+	students[i].address,
+	students[i].email
+	);
+	i++;
+	}
+	*****/
+
 	fclose(fp);
 	return 0;
 }
 
-   
