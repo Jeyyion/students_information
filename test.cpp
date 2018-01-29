@@ -335,8 +335,8 @@ int browse_stu_xinxi()
 	students[i].email
 	);
 	i++;
-	}           
-	*****/
+	}                 
+	*********/
 
 	fclose(fp);
 	return 0;
