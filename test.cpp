@@ -336,7 +336,7 @@ int browse_stu_xinxi()
 	);
 	i++;
 	}                 
-	*********/
+	**********/
 
 	fclose(fp);
 	return 0;
